@@ -257,9 +257,12 @@ export default function HomePage() {
               <img
                 src="/logos.png"
                 alt="Logo"
-                width="32"
-                height="32"
+                width={32}
+                height={32}
+                loading="lazy"
+                decoding="async"
                 className="text-black transition-transform duration-300 group-hover:scale-110"
+                style={{ imageRendering: 'auto' }}
               />
             </div>
           </div>
@@ -305,7 +308,7 @@ export default function HomePage() {
                 { value: timeLeft.hours.toString().padStart(2, "0"), label: "HOURS" },
                 { value: timeLeft.minutes.toString().padStart(2, "0"), label: "MINUTES" },
                 { value: timeLeft.seconds.toString().padStart(2, "0"), label: "SECONDS" },
-              ].map((item, index) => (
+              ].map((item) => (
                 <div key={item.label} className="text-center group cursor-pointer">
                   <div className="text-3xl md:text-4xl font-bold text-gray-900 transition-all duration-500 group-hover:scale-125 group-hover:text-lime-600 tabular-nums relative">
                     {item.value}
