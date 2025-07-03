@@ -257,8 +257,8 @@ export default function HomePage() {
               <img
                 src="/logos.png"
                 alt="Logo"
-                width={32}
-                height={32}
+                width={45}
+                height={45}
                 loading="lazy"
                 decoding="async"
                 className="text-black transition-transform duration-300 group-hover:scale-110"
