@@ -108,7 +108,11 @@ function ParticleSystem({ trigger }: { trigger: boolean }) {
 }
 
 export default function HomePage() {
+  // Set your manual countdown target date/time here (YYYY-MM-DDTHH:MM:SS format)
+  const COUNTDOWN_TARGET = "2025-07-10T12:00:00" // <-- Set your desired target date/time
+
   const [timeLeft, setTimeLeft] = useState({
+    days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0,
@@ -119,25 +123,11 @@ export default function HomePage() {
   const [particleTrigger, setParticleTrigger] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
-  // Persistent timer logic
+  // Manual countdown timer logic
   useEffect(() => {
     setMounted(true)
 
-    // Set target date - you can modify this to your desired launch date
-    const getTargetDate = () => {
-      const stored = localStorage.getItem("typesmart-launch-date")
-      if (stored) {
-        return new Date(stored)
-      }
-
-      // Set launch date to 24 hours from first visit
-      const targetDate = new Date()
-      targetDate.setHours(targetDate.getHours() + 24)
-      localStorage.setItem("typesmart-launch-date", targetDate.toISOString())
-      return targetDate
-    }
-
-    const targetDate = getTargetDate()
+    const targetDate = new Date(COUNTDOWN_TARGET)
 
     const updateTimer = () => {
       const now = new Date().getTime()
@@ -145,30 +135,25 @@ export default function HomePage() {
       const difference = target - now
 
       if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24))
         const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
         const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60))
         const seconds = Math.floor((difference % (1000 * 60)) / 1000)
-
-        setTimeLeft({ hours, minutes, seconds })
+        setTimeLeft({ days, hours, minutes, seconds })
       } else {
-        // Timer has reached zero
-        setTimeLeft({ hours: 0, minutes: 0, seconds: 0 })
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 })
       }
     }
 
-    // Update immediately
     updateTimer()
 
     // Mouse tracking for interactive effects
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY })
     }
-
     window.addEventListener("mousemove", handleMouseMove)
 
-    // Update timer every second
     const timer = setInterval(updateTimer, 1000)
-
     return () => {
       clearInterval(timer)
       window.removeEventListener("mousemove", handleMouseMove)
@@ -189,7 +174,7 @@ export default function HomePage() {
       logEvent(analytics, "waitlist_click")
     }
     // Open Tally form in new tab
-    window.open("https://tally.so/r/wv174g", "_blank")
+    window.open("https://tally.so/r/wAYgXW", "_blank")
   }
 
   const faqItems = [
@@ -270,7 +255,7 @@ export default function HomePage() {
           {/* Available Badge */}
           <div className="flex items-center justify-center gap-2 text-sm text-gray-600 animate-in slide-in-from-top duration-1000 delay-200">
             <div className="w-2 h-2 bg-lime-400 rounded-full animate-pulse shadow-sm"></div>
-            <span className="font-medium tracking-wide">AVAILABLE IN JUNE 2025</span>
+            <span className="font-medium tracking-wide">AVAILABLE IN JULY 2025</span>
           </div>
 
           {/* Main Heading */}
@@ -303,23 +288,24 @@ export default function HomePage() {
 
           {/* Countdown Timer */}
           <div className="space-y-6 animate-in slide-in-from-bottom duration-1000 delay-700">
-            <div className="flex justify-center gap-6 md:gap-8">
-              {[
-                { value: timeLeft.hours.toString().padStart(2, "0"), label: "HOURS" },
-                { value: timeLeft.minutes.toString().padStart(2, "0"), label: "MINUTES" },
-                { value: timeLeft.seconds.toString().padStart(2, "0"), label: "SECONDS" },
-              ].map((item) => (
-                <div key={item.label} className="text-center group cursor-pointer">
-                  <div className="text-3xl md:text-4xl font-bold text-gray-900 transition-all duration-500 group-hover:scale-125 group-hover:text-lime-600 tabular-nums relative">
-                    {item.value}
-                    <div className="absolute inset-0 bg-lime-400/20 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300 -z-10" />
-                  </div>
-                  <div className="text-xs text-gray-500 uppercase tracking-wide font-medium mt-2 group-hover:text-gray-700 transition-colors duration-300">
-                    {item.label}
-                  </div>
+          <div className="flex justify-center gap-6 md:gap-8">
+            {[
+              { value: timeLeft.days.toString().padStart(2, "0"), label: "DAYS" },
+              { value: timeLeft.hours.toString().padStart(2, "0"), label: "HOURS" },
+              { value: timeLeft.minutes.toString().padStart(2, "0"), label: "MINUTES" },
+              { value: timeLeft.seconds.toString().padStart(2, "0"), label: "SECONDS" },
+            ].map((item) => (
+              <div key={item.label} className="text-center group cursor-pointer">
+                <div className="text-3xl md:text-4xl font-bold text-gray-900 transition-all duration-500 group-hover:scale-125 group-hover:text-lime-600 tabular-nums relative">
+                  {item.value}
+                  <div className="absolute inset-0 bg-lime-400/20 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300 -z-10" />
                 </div>
-              ))}
-            </div>
+                <div className="text-xs text-gray-500 uppercase tracking-wide font-medium mt-2 group-hover:text-gray-700 transition-colors duration-300">
+                  {item.label}
+                </div>
+              </div>
+            ))}
+          </div>
 
             <div className="flex items-center justify-center gap-2 text-sm text-gray-600">
               <Calendar className="w-4 h-4 text-gray-400 animate-pulse" />
