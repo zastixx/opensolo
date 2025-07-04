@@ -236,21 +236,27 @@ export default function HomePage() {
 
       <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-50 to-gray-100 flex flex-col items-center px-4 py-12 relative overflow-hidden">
         <div className="max-w-2xl mx-auto text-center space-y-8 relative z-20">
-          {/* Logo */}
-          <div className="flex justify-center animate-in slide-in-from-top duration-1000">
-            <div className="w-16 h-16 bg-lime-400 rounded-2xl flex items-center justify-center hover:scale-110 hover:rotate-3 transition-all duration-500 cursor-pointer shadow-lg hover:shadow-2xl group">
-              <img
-                src="/logos.png"
-                alt="Logo"
-                width={45}
-                height={45}
-                loading="lazy"
-                decoding="async"
-                className="text-black transition-transform duration-300 group-hover:scale-110"
-                style={{ imageRendering: 'auto' }}
-              />
-            </div>
-          </div>
+      {/* Logo */}
+      <div className="flex flex-col items-center animate-in slide-in-from-top duration-1000">
+        <div className="w-16 h-16 bg-lime-400 rounded-2xl flex items-center justify-center hover:scale-110 hover:rotate-3 transition-all duration-500 cursor-pointer shadow-lg hover:shadow-2xl group">
+          <img
+            src="/logos.png"
+            alt="Logo"
+            width={45}
+            height={45}
+            loading="lazy"
+            decoding="async"
+            className="text-black transition-transform duration-300 group-hover:scale-110"
+            style={{ imageRendering: 'auto' }}
+          />
+        </div>
+        {/* Product Hunt Badge */}
+        <div className="mt-4">
+          <a href="https://www.producthunt.com/products/opensolo?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-opensolo" target="_blank" rel="noopener noreferrer">
+            <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=987965&theme=light&t=1751608067045" alt="OpenSolo - Your stage for open source excellence | Product Hunt" style={{ width: '150px', height: '54px' }} width="250" height="54" />
+          </a>
+        </div>
+      </div>
 
           {/* Available Badge */}
           <div className="flex items-center justify-center gap-2 text-sm text-gray-600 animate-in slide-in-from-top duration-1000 delay-200">
