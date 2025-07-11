@@ -109,7 +109,7 @@ function ParticleSystem({ trigger }: { trigger: boolean }) {
 
 export default function HomePage() {
   // Set your manual countdown target date/time here (YYYY-MM-DDTHH:MM:SS format)
-  const COUNTDOWN_TARGET = "2025-07-10T12:00:00" // <-- Set your desired target date/time
+  const COUNTDOWN_TARGET = "2025-07-17T12:00:00" // <-- Set your desired target date/time
 
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
