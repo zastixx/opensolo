@@ -209,7 +209,7 @@ export default function HomePage() {
         "Absolutely! Project maintainers can list their open-source projects on OpenSolo to attract new contributors, showcase their work, and connect with a wider audience of developers looking to help. We review submissions to ensure they meet our quality and community standards.",
     },
     {
-      question: "Where can I find support within the soumalya community?",
+      question: "Where can I find support within the OpenSolo community?",
       answer:
         "We have a vibrant Discord community for real-time support, discussions, and networking. You can also find resources and guides on our platform to help you get started, and connect with other contributors and project maintainers.",
     },
